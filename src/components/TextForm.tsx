@@ -4,19 +4,42 @@ import { ChangeEvent, useState } from 'react';
 interface Props {
   heading: string;
   mode: string;
+  showAlert: any;
 }
 
 export default function TextForm(props: Props) {
+  const [text, setText] = useState<string>('');
+
+  const isEmptyText = () => {
+    if (text === '' || text === undefined || text === null) {
+      return true;
+    } else {
+      return false
+    }
+  }
+
   const handleUpperCaseClick = () => {
+    if (isEmptyText())
+      return props.showAlert('danger', 'Please enter some text.');
+
     setText(text.toUpperCase());
+    props.showAlert('success', 'Converted to Uppercase.');
   }
 
   const handleLowerCaseClick = () => {
+    if (isEmptyText())
+      return props.showAlert('danger', 'Please enter some text.');
+
     setText(text.toLowerCase());
+    props.showAlert('success', 'Converted to Lowercase.');
   }
 
   const handleExtraSpaces = () => {
+    if (isEmptyText())
+      return props.showAlert('danger', 'Please enter some text.');
+
     setText(text.split(/[ ]+/).join(' '));
+    props.showAlert('success', 'Removed Extra Spaces.');
   }
 
   const handleOnChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -25,16 +48,25 @@ export default function TextForm(props: Props) {
 
   const handleClearTextClick = () => {
     setText('');
+    props.showAlert('success', 'Text is cleared.');
   }
 
   const handleCopyClick = () => {
+    if (isEmptyText())
+      return props.showAlert('danger', 'Please enter some text.');
+
     let textArea = document.getElementById('myBox') as HTMLTextAreaElement;
     textArea.select();
     navigator.clipboard.writeText(textArea.value);
+    props.showAlert('success', 'Copied to Clipboard.');
   }
 
   const handleReverseClick = () => {
+    if (isEmptyText())
+      return props.showAlert('danger', 'Please enter some text.');
+
     setText(text.split('').reverse().join(''));
+    props.showAlert('success', 'Reversed the Text.');
   }
 
   const countWords = (str: string) => {
@@ -42,7 +74,7 @@ export default function TextForm(props: Props) {
       return 0;
     }
 
-    let words = str.split(' ');
+    let words = str.trim().split(/\s+/);
     return words.length;
   }
 
@@ -50,13 +82,46 @@ export default function TextForm(props: Props) {
     return str.length;
   }
 
-  const [text, setText] = useState<string>('');
+  const textColor = () => {
+    switch (props.mode) {
+      case 'light':
+      case 'white':
+      case 'grey':
+        return '#042743';
+      default:
+        return 'white';
+    }
+  }
+
+  const backgroundColor = () => {
+    switch (props.mode) {
+      case 'light':
+      case 'grey':
+        return '#f2eded';
+      case 'white':
+        return 'white';
+      case 'dark':
+        return "#042743";
+      case 'blue':
+        return "#4d4db7";
+      case 'black':
+        return "black";
+      case 'red':
+        return "#9d2222";
+      case 'green':
+        return "#167516";
+      default:
+        return 'white';
+    }
+  }
+
+
   return (
     <>
-      <div className="container my-2" style={{ color: (props.mode === 'light') ? '#042743' : 'white' }}>
-        <h2>{props.heading}</h2>
+      <div className="container my-2">
+        <h2 style={{ color: textColor() }}>{props.heading}</h2>
         <div className="mb-3">
-          <textarea className="form-control" value={text} onChange={handleOnChange} style={{ backgroundColor: (props.mode === 'light') ? 'white' : '#042743', color: (props.mode === 'light') ? '#042743' : 'white' }} id="myBox" rows={10}></textarea>
+          <textarea className="form-control" value={text} onChange={handleOnChange} style={{ backgroundColor: backgroundColor(), color: textColor() }} id="myBox" rows={10}></textarea>
         </div>
         <button className="btn btn-primary mx-1" onClick={handleUpperCaseClick}>Convert to Uppercase</button>
         <button className="btn btn-primary mx-1" onClick={handleLowerCaseClick}>Convert to Lowercase</button>
@@ -65,7 +130,8 @@ export default function TextForm(props: Props) {
         <button className="btn btn-primary mx-1" onClick={handleReverseClick}>Reverse Text</button>
         <button className="btn btn-primary mx-1" onClick={handleClearTextClick}>Clear Text</button>
       </div>
-      <div className="container my-2" style={{ color: (props.mode === 'light') ? '#042743' : 'white' }}>
+      <br />
+      <div className="container my-2" style={{ color: textColor() }}>
         <h2>Text Summary</h2>
         <p>{countWords(text)} words and {countChars(text)} characters</p>
         <h2>Preview</h2>

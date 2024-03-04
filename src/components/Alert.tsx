@@ -1,14 +1,20 @@
-import React from 'react'
 
 interface AlertProp {
-  message: string;
+  alert: { type: string; message: string; };
 }
 
 export function Alert(props: AlertProp) {
+  const capitalize = (word: string) => {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }
+
   return (
-    <div className="alert alert-warning alert-dismissible fade show" role="alert">
-      <strong>{props.message}</strong>
-      <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+    <>{
+      props.alert && props.alert.type && props.alert.message &&
+      <div className={`alert alert-${props.alert.type} alert-dismissible fade show`} role="alert">
+        <strong>{capitalize(props.alert.type)}</strong>: {props.alert.message}
+      </div>
+    }
+    </>
   )
 }

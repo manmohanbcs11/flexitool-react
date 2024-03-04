@@ -4,10 +4,20 @@ interface AboutProps {
 }
 
 export default function About(props: AboutProps) {
+
+    const textColor = () => {
+        if (props.mode === 'light' || props.mode === 'white' || props.mode === 'grey') {
+            return "#042743";
+        } else {
+            return "white";
+        }
+    }
+
     return (
-        <div className='container' style={{ color: (props.mode === 'light') ? '#042743' : 'white' }}>
-            <h1 className='my-3'>About Us</h1>
-            <p>"About" pages are essential components of websites, serving as a window into the ethos and purpose behind an entity. They provide visitors with insight into the organization's mission, values, and history. Through concise yet compelling narratives, about pages establish a connection with audiences, fostering trust and credibility. From businesses showcasing their unique offerings to individuals sharing their passions, these pages offer a glimpse into the driving forces behind a brand or individual. Whether it's highlighting achievements, sharing personal anecdotes, or outlining future goals, about pages play a pivotal role in shaping the perception of a website and its creators.</p>
+        <div className='container' style={{ color: textColor() }}>
+            <br/>
+            <p><i>This website serves as a text utility application, allowing users to input text and convert it to their desired format. Its primary features include converting text to uppercase or lowercase, removing unnecessary spaces, reversing the text, clearing the input, copying to the clipboard, and counting words and characters.</i></p>
+            <br/>
         </div>
     )
 }
