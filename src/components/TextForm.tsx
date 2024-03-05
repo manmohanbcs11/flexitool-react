@@ -4,7 +4,6 @@ import { Utils } from '../controller/utils';
 
 
 interface Props {
-  heading: string;
   mode: string;
   showAlert: any;
 }
@@ -78,10 +77,10 @@ export default function TextForm(props: Props) {
 
   return (
     <>
-      <div className="container my-2">
-        <p><i style={{ color: textColor }}>This utility serves as an application, allowing users to input text and convert it to their desired format. Its primary features include converting text to uppercase or lowercase, removing unnecessary spaces, reversing the text, clearing the input, copying to the clipboard, and counting words and characters.</i></p>
+      <div className="container">
+        <p style={{ color: textColor }}>Text Utility serves as an application, allowing users to input text and convert it to their desired format. Its primary features include converting text to uppercase or lowercase, removing unnecessary spaces, reversing the text, clearing the input, copying to the clipboard, and counting words and characters.</p>
         <br />
-        <h2 style={{ color: textColor }}>{props.heading}</h2>
+        <h4 style={{ color: textColor }}>To format and play with your text, just enter it below:</h4>
         <div className="mb-3">
           <textarea className="form-control" value={text} onChange={handleOnChange} style={myStyle} id="myBox" rows={10}></textarea>
         </div>

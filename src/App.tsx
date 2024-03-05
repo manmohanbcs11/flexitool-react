@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'; // Correct import statement
 import './App.css';
 import About from './components/About';
-import Age from './components/Age'
+import Age from './components/Age';
 import { Alert } from './components/Alert';
-import { MyNavbar } from './components/Navbar';
-import TextForm from './components/TextForm';
 import Home from './components/Home';
+import { Navbar } from './components/Navbar';
+import TextForm from './components/TextForm';
 
 function App() {
   const [mode, setMode] = useState('white');
@@ -65,13 +65,13 @@ function App() {
   return (
     <Router>
       <>
-        <MyNavbar title='TextUtils' mode={mode} toggleMode={toggleMode}></MyNavbar>
+        <Navbar mode={mode} toggleMode={toggleMode}></Navbar>
         <Alert alert={alert} />
 
         {/* Use Routes for defining routes */}
         <Routes>
           <Route path="/" element={<Home mode={mode}></Home>} />
-          <Route path="/text" element={<TextForm heading='Enter the text to analyze below:' showAlert={showAlert} mode={mode}></TextForm>} />
+          <Route path="/text" element={<TextForm showAlert={showAlert} mode={mode}></TextForm>} />
           <Route path="/age" element={<Age mode={mode}></Age>} />
           <Route path="/about" element={<About mode={mode}></About>} />
         </Routes>

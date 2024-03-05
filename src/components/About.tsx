@@ -44,7 +44,7 @@ export default function About(props: AboutProps) {
                     </h2>
                     <div id="collapseThree" className="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                         <div className="accordion-body" style={myStyle}>
-                            This TextUtility and AgeUtility are entirely free to use and aids users requiring text modifications such as converting text to uppercase or lowercase, removing unnecessary spaces, reversing the text, clearing the input, copying to the clipboard, and counting words and characters.
+                            FlexiTool is entirely free to use and aids users requiring text modifications such as converting text to uppercase or lowercase, removing unnecessary spaces, reversing the text, clearing the input, copying to the clipboard, and counting words and characters.
                         </div>
                     </div>
                 </div>

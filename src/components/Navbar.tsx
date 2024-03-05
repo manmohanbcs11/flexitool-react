@@ -4,12 +4,11 @@ import { NavLink } from "react-router-dom";
 import { GetDynamicStyle } from "../controller/getDynamicStyle";
 
 interface NavProps {
-  title: string;
   mode: string;
   toggleMode(mode: string): void;
 }
 
-export function MyNavbar(navProps: NavProps) {
+export function Navbar(navProps: NavProps) {
 
   function changeMode(colourMode: string): void {
     if (colourMode === 'light') {
