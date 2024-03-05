@@ -80,23 +80,23 @@ export default function TextForm(props: Props) {
       <div className="container">
         <p style={{ color: textColor }}>Text Utility serves as an application, allowing users to input text and convert it to their desired format. Its primary features include converting text to uppercase or lowercase, removing unnecessary spaces, reversing the text, clearing the input, copying to the clipboard, and counting words and characters.</p>
         <br />
-        <h4 style={{ color: textColor }}>To format and play with your text, just enter it below:</h4>
+        <h5 style={{ color: textColor }}>To format and play with your text, just enter it below:</h5>
         <div className="mb-3">
           <textarea className="form-control" value={text} onChange={handleOnChange} style={myStyle} id="myBox" rows={10}></textarea>
         </div>
-        <button className="btn btn-primary mx-1 my-1" onClick={handleUpperCaseClick}>Convert to Uppercase</button>
-        <button className="btn btn-primary mx-1 my-1" onClick={handleLowerCaseClick}>Convert to Lowercase</button>
-        <button className="btn btn-primary mx-1 my-1" onClick={handleExtraSpaces}>Remove Extra Spaces</button>
-        <button className="btn btn-primary mx-1 my-1" onClick={handleCopyClick}>Copy to Clipboard</button>
-        <button className="btn btn-primary mx-1 my-1" onClick={handleReverseClick}>Reverse Text</button>
-        <button className="btn btn-primary mx-1 my-1" onClick={handleClearTextClick}>Clear Text</button>
+        <button className="btn btn-primary mx-1 my-1" disabled={Utils.isEmpty(text)} onClick={handleUpperCaseClick}>Convert to Uppercase</button>
+        <button className="btn btn-primary mx-1 my-1" disabled={Utils.isEmpty(text)} onClick={handleLowerCaseClick}>Convert to Lowercase</button>
+        <button className="btn btn-primary mx-1 my-1" disabled={Utils.isEmpty(text)} onClick={handleExtraSpaces}>Remove Extra Spaces</button>
+        <button className="btn btn-primary mx-1 my-1" disabled={Utils.isEmpty(text)} onClick={handleCopyClick}>Copy to Clipboard</button>
+        <button className="btn btn-primary mx-1 my-1" disabled={Utils.isEmpty(text)} onClick={handleReverseClick}>Reverse Text</button>
+        <button className="btn btn-primary mx-1 my-1" disabled={Utils.isEmpty(text)} onClick={handleClearTextClick}>Clear Text</button>
       </div>
       <br />
       <div className="container my-2" style={{ color: textColor }}>
-        <h2>Text Summary</h2>
+        <h3>Text Summary</h3>
         <p>{countWords(text)} words and {countChars(text)} characters</p>
-        <h2>Preview</h2>
-        <p>{text.length > 0 ? text : 'Enter something in textbox above to preview.'}</p>
+        <h3>Preview</h3>
+        <p>{text.length > 0 ? text : 'Nothing to preview!'}</p>
       </div>
     </>
   );
