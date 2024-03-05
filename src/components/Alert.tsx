@@ -9,12 +9,14 @@ export function Alert(props: AlertProp) {
   }
 
   return (
-    <>{
-      props.alert && props.alert.type && props.alert.message &&
-      <div className={`alert alert-${props.alert.type} alert-dismissible fade show`} role="alert">
-        <strong>{capitalize(props.alert.type)}</strong>: {props.alert.message}
+    <>
+      <div style={{ height: '70px' }}>
+        {props.alert && props.alert.type && props.alert.message &&
+          <div className={`alert alert-${props.alert.type} alert-dismissible fade show`} role="alert">
+            <strong>{capitalize(props.alert.type)}</strong>: {props.alert.message}
+          </div>
+        }
       </div>
-    }
     </>
   )
 }

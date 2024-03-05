@@ -60,6 +60,9 @@ export function MyNavbar(navProps: NavProps) {
             <li className="nav-item">
               <NavLink className="nav-link active" style={{ color: textColor() }} to="/age">AgeUtility</NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link active" style={{ color: textColor() }} to="/about">About</NavLink>
+            </li>
           </ul>
           <form className="d-flex" role="search">
             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />

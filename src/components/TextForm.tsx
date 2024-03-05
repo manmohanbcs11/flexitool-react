@@ -115,20 +115,21 @@ export default function TextForm(props: Props) {
     }
   }
 
-
   return (
     <>
       <div className="container my-2">
+        <p><i style={{ color: textColor() }}>This utility serves as an application, allowing users to input text and convert it to their desired format. Its primary features include converting text to uppercase or lowercase, removing unnecessary spaces, reversing the text, clearing the input, copying to the clipboard, and counting words and characters.</i></p>
+        <br />
         <h2 style={{ color: textColor() }}>{props.heading}</h2>
         <div className="mb-3">
           <textarea className="form-control" value={text} onChange={handleOnChange} style={{ backgroundColor: backgroundColor(), color: textColor() }} id="myBox" rows={10}></textarea>
         </div>
-        <button className="btn btn-primary mx-1" onClick={handleUpperCaseClick}>Convert to Uppercase</button>
-        <button className="btn btn-primary mx-1" onClick={handleLowerCaseClick}>Convert to Lowercase</button>
-        <button className="btn btn-primary mx-1" onClick={handleExtraSpaces}>Remove Extra Spaces</button>
-        <button className="btn btn-primary mx-1" onClick={handleCopyClick}>Copy to Clipboard</button>
-        <button className="btn btn-primary mx-1" onClick={handleReverseClick}>Reverse Text</button>
-        <button className="btn btn-primary mx-1" onClick={handleClearTextClick}>Clear Text</button>
+        <button className="btn btn-primary mx-1 my-1" onClick={handleUpperCaseClick}>Convert to Uppercase</button>
+        <button className="btn btn-primary mx-1 my-1" onClick={handleLowerCaseClick}>Convert to Lowercase</button>
+        <button className="btn btn-primary mx-1 my-1" onClick={handleExtraSpaces}>Remove Extra Spaces</button>
+        <button className="btn btn-primary mx-1 my-1" onClick={handleCopyClick}>Copy to Clipboard</button>
+        <button className="btn btn-primary mx-1 my-1" onClick={handleReverseClick}>Reverse Text</button>
+        <button className="btn btn-primary mx-1 my-1" onClick={handleClearTextClick}>Clear Text</button>
       </div>
       <br />
       <div className="container my-2" style={{ color: textColor() }}>
