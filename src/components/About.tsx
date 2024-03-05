@@ -1,47 +1,12 @@
+import { GetDynamicStyle } from "../controller/getDynamicStyle";
 
 interface AboutProps {
     mode: string
 }
 
 export default function About(props: AboutProps) {
-
-    const textColor = () => {
-        switch (props.mode) {
-          case 'light':
-          case 'white':
-          case 'grey':
-            return '#042743';
-          default:
-            return 'white';
-        }
-      }
-    
-      const backgroundColor = () => {
-        switch (props.mode) {
-          case 'light':
-          case 'grey':
-            return '#f2eded';
-          case 'white':
-            return 'white';
-          case 'dark':
-            return "#042743";
-          case 'blue':
-            return "#4d4db7";
-          case 'black':
-            return "black";
-          case 'red':
-            return "#9d2222";
-          case 'green':
-            return "#167516";
-          default:
-            return 'white';
-        }
-      }
-
-    let myStyle = {
-        color: textColor(),
-        backgroundColor: backgroundColor()
-    }
+    const currentStyle = new GetDynamicStyle(props.mode);
+    const myStyle = currentStyle.getStyle();
 
     return (
         <div className='container' style={myStyle}>

@@ -6,6 +6,7 @@ import Age from './components/Age'
 import { Alert } from './components/Alert';
 import { MyNavbar } from './components/Navbar';
 import TextForm from './components/TextForm';
+import Home from './components/Home';
 
 function App() {
   const [mode, setMode] = useState('white');
@@ -69,9 +70,10 @@ function App() {
 
         {/* Use Routes for defining routes */}
         <Routes>
-          <Route path="/" element={<TextForm heading='Enter the text to analyze below:' showAlert={showAlert} mode={mode}></TextForm>} />
-          <Route path="/about" element={<About mode={mode}></About>} />
+          <Route path="/" element={<Home mode={mode}></Home>} />
+          <Route path="/text" element={<TextForm heading='Enter the text to analyze below:' showAlert={showAlert} mode={mode}></TextForm>} />
           <Route path="/age" element={<Age mode={mode}></Age>} />
+          <Route path="/about" element={<About mode={mode}></About>} />
         </Routes>
       </>
     </Router>

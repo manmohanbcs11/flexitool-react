@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
+import { GetDynamicStyle } from '../controller/getDynamicStyle';
 
 interface AgeProps {
   mode: string
@@ -32,16 +33,11 @@ export default function Age(props: AgeProps) {
     setAge(`${years} years, ${months} months, ${days} days`);
   }
 
-  const textColor = () => {
-    if (props.mode === 'light' || props.mode === 'white' || props.mode === 'grey') {
-      return "#042743";
-    } else {
-      return "white";
-    }
-  }
+  const currentStyle = new GetDynamicStyle(props.mode);
+  const textColor = currentStyle.textColor();
 
   return (
-    <div className='age-container' style={{ color: textColor() }}>
+    <div className='age-container' style={{ color: textColor }}>
       <h2>Age Calculator</h2>
       <p>The Age Calculator can determine the age or interval between two dates. The calculated age will be displayed in years, months, and days.</p>
       <div className="age-input-container">
@@ -52,8 +48,8 @@ export default function Age(props: AgeProps) {
         <label htmlFor="end" className="age-label">End Date:</label>
         <input type="date" id="end" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="age-input" />
       </div>
-      <button onClick={calculateAge} className="button">Calculate Age</button>
-      {age !== '' && <strong className="result"><br/>Age: {age}</strong>}
+      <button onClick={calculateAge} className="age-button">Calculate Age</button>
+      {age !== '' && <strong className="age-result"><br/>Age: {age}</strong>}
     </div>
   );
 }
