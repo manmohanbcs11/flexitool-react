@@ -46,9 +46,7 @@ export default function TextForm(props: Props) {
 
   const handleCopyClick = () => {
     showDanger();
-    let textArea = document.getElementById('myBox') as HTMLTextAreaElement;
-    textArea.select();
-    navigator.clipboard.writeText(textArea.value);
+    navigator.clipboard.writeText(text);
     props.showAlert('success', 'Copied to Clipboard.');
   }
 
