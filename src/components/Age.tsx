@@ -39,13 +39,13 @@ export default function Age(props: AgeProps) {
 
   return (
     <div className='age-container' style={{ color: textColor }}>
-      <h2>Age Calculator</h2>
-      <p>The Age Calculator can determine the age or interval between two dates. The calculated age will be displayed in years, months, and days.</p>
-      <div className="age-input-container">
+      <h2>Age Utility</h2>
+      <p>The Age Utility can determine the age or interval between two dates. The calculated age will be displayed in years, months, and days.</p>
+      <div className="age-input-container" style={{ width: '75%' }}>
         <label htmlFor="start" className="age-label">Start Date:</label>
         <input type="date" id="start" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="age-input" />
       </div>
-      <div className="age-input-container">
+      <div className="age-input-container" style={{ width: '75%' }}>
         <label htmlFor="end" className="age-label">End Date:</label>
         <input type="date" id="end" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="age-input" />
       </div>

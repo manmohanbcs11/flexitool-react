@@ -20,7 +20,7 @@ export default function About(props: AboutProps) {
                     </h2>
                     <div id="collapseOne" className="accordion-collapse collapsed" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                         <div className="accordion-body" style={myStyle}>
-                            This utility serves as an application, allowing users to input text and convert it to their desired format. Its primary features include converting text to uppercase or lowercase, removing unnecessary spaces, reversing the text, clearing the input, copying to the clipboard, and counting words and characters.
+                            The Text Utility serves as an application, allowing users to input text and convert it to their desired format. Its primary features include converting text to uppercase or lowercase, removing unnecessary spaces, reversing the text, clearing the input, copying to the clipboard, and counting words and characters.
                         </div>
                     </div>
                 </div>
@@ -32,7 +32,7 @@ export default function About(props: AboutProps) {
                     </h2>
                     <div id="collapseTwo" className="accordion-collapse collapsed" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                         <div className="accordion-body" style={myStyle}>
-                            Additionally, this utility doubles as an application called The Age Calculator, which can ascertain the age or duration between two dates. The resulting age will be presented in years, months, and days.
+                            Additionally, this utility doubles as an application called The Age Utility, which can ascertain the age or duration between two dates. The resulting age will be presented in years, months, and days.
                         </div>
                     </div>
                 </div>
