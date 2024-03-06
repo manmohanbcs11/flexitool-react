@@ -1,6 +1,6 @@
-# react-typescript-textutils
+# flexitool-react
 
-This text util is designed for playing with text, allowing for magical changes to be made within it.
+FlexiTool is a utility that enables users to input text and convert it to their preferred format and additionally, this utility includes an Age Calculator feature. The util is designed based on react function based components.
 
 # Getting Started with Create React App
 
