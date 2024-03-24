@@ -5,7 +5,7 @@ import { Utils } from '../controller/utils';
 
 interface Props {
   mode: string;
-  showAlert: any;
+  showAlert: (type: string, message: string) => void;
 }
 
 export default function TextForm(props: Props) {

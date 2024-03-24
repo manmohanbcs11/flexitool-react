@@ -7,12 +7,17 @@ import { Alert } from './components/Alert';
 import Home from './components/Home';
 import { Navbar } from './components/Navbar';
 import TextForm from './components/TextForm';
+import SignUp from './components/SignUp';
+import LogIn from './components/LogIn';
 
 function App() {
-  const [mode, setMode] = useState('white');
-  const [alert, setAlert] = useState({ type: '', message: '' });
+  const [signedUp, setSignedUp] = useState<boolean>(false);
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const [mode, setMode] = useState<string>('white');
+  const [alert, setAlert] = useState<{ type: string; message: string }>({ type: '', message: '' });
 
   const showAlert = (type: string, message: string) => {
+    console.log('showing alert', type, message);
     setAlert({
       message: message,
       type: type
@@ -23,7 +28,7 @@ function App() {
         message: '',
         type: ''
       })
-    }, 1500);
+    }, 2000);
   }
 
   const toggleMode = (mode: string) => {
@@ -62,11 +67,29 @@ function App() {
     }
   }
 
+  const handleSignUp = () => {
+    setSignedUp(true); // Update sign-up status
+    console.log('handleSignUp');
+  };
+
+  const handleLogIn = () => {
+    setLoggedIn(true); // Update log-in status
+    console.log('handleLogIn');
+  };
+
   return (
-    <Router>
-      <>
+    <>
+      <Alert alert={alert} />
+
+      {!signedUp && !loggedIn && (
+        <>
+          <SignUp onSignUp={handleSignUp} showAlert={showAlert} />
+          <div className="or-divider">OR</div>
+          <LogIn onLogIn={handleLogIn} showAlert={showAlert} />
+        </>
+      )}
+      {(signedUp || loggedIn) && <Router>
         <Navbar mode={mode} toggleMode={toggleMode}></Navbar>
-        <Alert alert={alert} />
 
         {/* Use Routes for defining routes */}
         <Routes>
@@ -75,8 +98,8 @@ function App() {
           <Route path="/age" element={<Age mode={mode}></Age>} />
           <Route path="/about" element={<About mode={mode}></About>} />
         </Routes>
-      </>
-    </Router>
+      </Router>}
+    </>
   );
 }
 
