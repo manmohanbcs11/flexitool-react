@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import About from './components/About';
-import { Account } from './components/Account';
+import { Account } from './controller/Account';
 import Age from './components/Age';
 import { Alert } from './components/Alert';
 import Home from './components/Home';

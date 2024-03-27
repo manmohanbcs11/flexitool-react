@@ -1,6 +1,6 @@
 import { CognitoUserPool } from 'amazon-cognito-identity-js';
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './css/SignUp.css';
 
 interface SignUpProps {
@@ -9,6 +9,7 @@ interface SignUpProps {
 }
 
 export default function SignUp(props: SignUpProps) {
+  const navigate = useNavigate();
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -27,6 +28,8 @@ export default function SignUp(props: SignUpProps) {
       } else {
         console.log(data);
         props.onSignUp();
+        navigate('/signup');
+        props.showAlert('success', 'User successfully registered, please check email and verify the link to continue.');
       }
     });
   }
