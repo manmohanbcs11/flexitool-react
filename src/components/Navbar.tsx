@@ -1,14 +1,17 @@
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { NavLink } from "react-router-dom";
+import { CognitoUserPool } from "amazon-cognito-identity-js";
+import { NavLink, useNavigate } from "react-router-dom";
 import { GetDynamicStyle } from "../controller/getDynamicStyle";
 
 interface NavProps {
   mode: string;
   toggleMode(mode: string): void;
+  loggedOut(): void;
 }
 
 export function Navbar(navProps: NavProps) {
+  const navigate = useNavigate();
 
   function changeMode(colourMode: string): void {
     if (colourMode === 'light') {
@@ -32,6 +35,20 @@ export function Navbar(navProps: NavProps) {
   const textColor = currentStyle.textColor();
   const navBackgroundColor = currentStyle.navBackgroundColor();
 
+  const logout = async () => {
+    const pool = new CognitoUserPool({
+      UserPoolId: 'ap-south-1_eNLKq4RsU',
+      ClientId: '4bpk6q1mtug24v8fgn2a8pj827'
+    });
+    const user = pool.getCurrentUser();
+    if (user) {
+      user.signOut();
+      navProps.loggedOut();
+      console.log('User signed out');
+      navigate('/');
+    }
+  };
+
   return (
     <nav className={`navbar navbar-expand-lg navbar-${navBackgroundColor} bg-${navBackgroundColor}`}>
       <div className="container-fluid">
@@ -50,10 +67,6 @@ export function Navbar(navProps: NavProps) {
               <NavLink className="nav-link active" style={{ color: textColor }} to="/about">About Us</NavLink>
             </li>
           </ul>
-          <form className="d-flex" role="search">
-            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-            <button className="btn btn-primary" type="submit">Search</button>
-          </form>
           <div className="dropdown">
             <button className="btn btn-secondary dropdown-toggle mx-1" type="button" style={{ backgroundColor: '#3366dd' }} data-bs-toggle="dropdown" id="modeSwitch" aria-expanded="false">
               Mode
@@ -67,6 +80,7 @@ export function Navbar(navProps: NavProps) {
               <li><button className="dropdown-item" onClick={() => changeMode('blue')} style={{ width: '80px', backgroundColor: '#4d4db7', color: 'white' }}>Blue</button></li>
               <li><button className="dropdown-item" onClick={() => changeMode('green')} style={{ width: '80px', backgroundColor: '#167516', color: 'white' }}>Green</button></li>
             </ul>
+            <button className="btn btn-secondary mx-1" type="button" style={{ backgroundColor: '#3366dd' }} onClick={() => logout()}>Logout</button>
           </div>
         </div>
       </div>

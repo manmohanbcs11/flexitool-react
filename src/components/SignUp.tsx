@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
 import { CognitoUserPool } from 'amazon-cognito-identity-js';
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import './css/SignUp.css';
 
 interface SignUpProps {
@@ -33,8 +34,8 @@ export default function SignUp(props: SignUpProps) {
 
   return (
     <div className='signup-container'>
-      <h3>Welcome to the FlexiTool</h3>
       <div className="form-container my-3">
+        <h3>Welcome to the FlexiTool</h3>
         <form onSubmit={onSubmit}>
           <label htmlFor="name" className="label-bold">Name</label>
           <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter your name" required />
@@ -44,6 +45,8 @@ export default function SignUp(props: SignUpProps) {
           <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" required />
           <button type="submit">Sign Up</button>
         </form>
+        <div className="or-divider">OR</div>
+        <NavLink className="nav-link btn btn-primary" style={{ backgroundColor: '#3366dd', padding: '10px' }} to="/">Log In</NavLink>
       </div>
     </div>
   );

@@ -1,35 +1,36 @@
-import { useState } from 'react';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'; // Correct import statement
+import { useEffect, useState } from 'react';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import About from './components/About';
+import { Account } from './components/Account';
 import Age from './components/Age';
 import { Alert } from './components/Alert';
 import Home from './components/Home';
+import LogIn from './components/LogIn';
 import { Navbar } from './components/Navbar';
 import TextForm from './components/TextForm';
 import SignUp from './components/SignUp';
-import LogIn from './components/LogIn';
 
 function App() {
   const [signedUp, setSignedUp] = useState<boolean>(false);
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const [loggedOut, setLoggedOut] = useState<boolean>(false);
   const [mode, setMode] = useState<string>('white');
   const [alert, setAlert] = useState<{ type: string; message: string }>({ type: '', message: '' });
 
   const showAlert = (type: string, message: string) => {
-    console.log('showing alert', type, message);
     setAlert({
       message: message,
       type: type
-    })
+    });
 
     setTimeout(() => {
       setAlert({
         message: '',
         type: ''
-      })
+      });
     }, 2000);
-  }
+  };
 
   const toggleMode = (mode: string) => {
     if (mode === 'white') {
@@ -65,7 +66,20 @@ function App() {
       document.body.style.backgroundColor = 'white';
       showAlert('success', 'Light mode is enabled.');
     }
-  }
+  };
+
+  useEffect(() => {
+    const isActive = async () => {
+      const account = new Account();
+      const session = await account.getSession();
+
+      if (session !== undefined && session.isValid()) {
+        setLoggedIn(true);
+      }
+    };
+
+    isActive();
+  }, []);
 
   const handleSignUp = () => {
     setSignedUp(true); // Update sign-up status
@@ -77,28 +91,37 @@ function App() {
     console.log('handleLogIn');
   };
 
+  const handleLogOut = () => {
+    setLoggedOut(true); // Update log-out status
+    setLoggedIn(false);
+    console.log('handleLogOut');
+  };
+
   return (
     <>
-      <Alert alert={alert} />
+      <Router>
 
-      {!signedUp && !loggedIn && (
-        <>
-          <SignUp onSignUp={handleSignUp} showAlert={showAlert} />
-          <div className="or-divider">OR</div>
-          <LogIn onLogIn={handleLogIn} showAlert={showAlert} />
-        </>
-      )}
-      {(signedUp || loggedIn) && <Router>
-        <Navbar mode={mode} toggleMode={toggleMode}></Navbar>
-
-        {/* Use Routes for defining routes */}
-        <Routes>
-          <Route path="/" element={<Home mode={mode}></Home>} />
-          <Route path="/text" element={<TextForm showAlert={showAlert} mode={mode}></TextForm>} />
-          <Route path="/age" element={<Age mode={mode}></Age>} />
-          <Route path="/about" element={<About mode={mode}></About>} />
-        </Routes>
-      </Router>}
+        {!loggedIn &&
+          <>
+            <Alert alert={alert} />
+            <Routes>
+              <Route path="/" element={<LogIn onLogIn={handleLogIn} showAlert={showAlert} />} />
+              <Route path="/signup" element={<SignUp onSignUp={handleSignUp} showAlert={showAlert} />} />
+            </Routes>
+          </>}
+        {loggedIn && (
+          <>
+            <Navbar mode={mode} loggedOut={handleLogOut} toggleMode={toggleMode}></Navbar>
+            <Alert alert={alert} />
+            <Routes>
+              <Route path="/" element={<Home mode={mode}></Home>} />
+              <Route path="/text" element={<TextForm showAlert={showAlert} mode={mode}></TextForm>} />
+              <Route path="/age" element={<Age mode={mode}></Age>} />
+              <Route path="/about" element={<About mode={mode}></About>} />
+            </Routes>
+          </>
+        )}
+      </Router>
     </>
   );
 }
