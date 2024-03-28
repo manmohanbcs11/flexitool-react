@@ -11,6 +11,8 @@ interface NavProps {
 }
 
 export function Navbar(navProps: NavProps) {
+  const COGNITO_USER_POOL_ID: string = process.env.REACT_APP_COGNITO_USER_POOL_ID || '';
+  const COGNITO_CLIENT_ID: string = process.env.REACT_APP_COGNITO_CLIENT_ID || '';
   const navigate = useNavigate();
 
   function changeMode(colourMode: string): void {
@@ -37,8 +39,8 @@ export function Navbar(navProps: NavProps) {
 
   const logout = async () => {
     const pool = new CognitoUserPool({
-      UserPoolId: 'ap-south-1_eNLKq4RsU',
-      ClientId: '4bpk6q1mtug24v8fgn2a8pj827'
+      UserPoolId: COGNITO_USER_POOL_ID,
+      ClientId: COGNITO_CLIENT_ID
     });
     const user = pool.getCurrentUser();
     if (user) {

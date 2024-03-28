@@ -29,7 +29,7 @@ function App() {
         message: '',
         type: ''
       });
-    }, 2000);
+    }, 3000);
   };
 
   const toggleMode = (mode: string) => {
@@ -82,19 +82,16 @@ function App() {
   }, []);
 
   const handleSignUp = () => {
-    setSignedUp(true); // Update sign-up status
-    console.log('handleSignUp');
+    setSignedUp(true);
   };
 
   const handleLogIn = () => {
-    setLoggedIn(true); // Update log-in status
-    console.log('handleLogIn');
+    setLoggedIn(true);
   };
 
   const handleLogOut = () => {
-    setLoggedOut(true); // Update log-out status
+    setLoggedOut(true);
     setLoggedIn(false);
-    console.log('handleLogOut');
   };
 
   return (

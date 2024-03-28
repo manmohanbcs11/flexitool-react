@@ -1,12 +1,12 @@
 import { AuthenticationDetails, CognitoUser, CognitoUserPool, CognitoUserSession, IAuthenticationDetailsData, ICognitoUserData } from 'amazon-cognito-identity-js';
-
 export class Account {
-
+  COGNITO_USER_POOL_ID: string = process.env.REACT_APP_COGNITO_USER_POOL_ID || '';
+  COGNITO_CLIENT_ID: string = process.env.REACT_APP_COGNITO_CLIENT_ID || '';
 
   async getSession(): Promise<CognitoUserSession | undefined> {
     const pool = new CognitoUserPool({
-      UserPoolId: 'ap-south-1_eNLKq4RsU',
-      ClientId: '4bpk6q1mtug24v8fgn2a8pj827'
+      UserPoolId: this.COGNITO_USER_POOL_ID,
+      ClientId: this.COGNITO_CLIENT_ID
     });
     const user = pool.getCurrentUser();
 
@@ -28,13 +28,12 @@ export class Account {
 
 
   async authenticate(Username: string, Password: string): Promise<void> {
-    console.log('authenticate:', Username, Password);
     return new Promise<void>((resolve, reject) => {
       const userData: ICognitoUserData = {
         Username,
         Pool: new CognitoUserPool({
-          UserPoolId: 'ap-south-1_eNLKq4RsU',
-          ClientId: '4bpk6q1mtug24v8fgn2a8pj827'
+          UserPoolId: this.COGNITO_USER_POOL_ID,
+          ClientId: this.COGNITO_CLIENT_ID
         })
       };
       const user = new CognitoUser(userData);
@@ -45,7 +44,7 @@ export class Account {
       user.authenticateUser(authDetails, {
         onSuccess: (result: any) => {
           console.log('onSuccess:', result);
-          resolve();
+          resolve(result);
         },
         onFailure: (err) => {
           console.error('onFailure:', err);

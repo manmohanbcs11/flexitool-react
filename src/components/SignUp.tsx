@@ -9,7 +9,10 @@ interface SignUpProps {
 }
 
 export default function SignUp(props: SignUpProps) {
+  const COGNITO_USER_POOL_ID: string = process.env.REACT_APP_COGNITO_USER_POOL_ID || '';
+  const COGNITO_CLIENT_ID: string = process.env.REACT_APP_COGNITO_CLIENT_ID || '';
   const navigate = useNavigate();
+
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -17,8 +20,8 @@ export default function SignUp(props: SignUpProps) {
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const cognitoPool = new CognitoUserPool({
-      UserPoolId: 'ap-south-1_eNLKq4RsU',
-      ClientId: '4bpk6q1mtug24v8fgn2a8pj827'
+      UserPoolId: COGNITO_USER_POOL_ID,
+      ClientId: COGNITO_CLIENT_ID
     });
 
     cognitoPool.signUp(email, password, [], [], (err, data) => {
@@ -26,9 +29,8 @@ export default function SignUp(props: SignUpProps) {
         console.error(err);
         props.showAlert('danger', err.message);
       } else {
-        console.log(data);
         props.onSignUp();
-        navigate('/signup');
+        navigate('/');
         props.showAlert('success', 'User successfully registered, please check email and verify the link to continue.');
       }
     });

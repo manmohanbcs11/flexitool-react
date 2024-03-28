@@ -12,15 +12,16 @@ const LogIn: React.FC<LogInProps> = ({ onLogIn, showAlert }: LogInProps) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const COGNITO_USER_POOL_ID: string = process.env.REACT_APP_COGNITO_USER_POOL_ID || '';
+  const COGNITO_CLIENT_ID: string = process.env.REACT_APP_COGNITO_CLIENT_ID || '';
+
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('onSubmit login');
-
     const userData: ICognitoUserData = {
       Username: email,
       Pool: new CognitoUserPool({
-        UserPoolId: 'ap-south-1_eNLKq4RsU',
-        ClientId: '4bpk6q1mtug24v8fgn2a8pj827'
+        UserPoolId: COGNITO_USER_POOL_ID,
+        ClientId: COGNITO_CLIENT_ID
       })
     };
     const user = new CognitoUser(userData);
@@ -33,7 +34,6 @@ const LogIn: React.FC<LogInProps> = ({ onLogIn, showAlert }: LogInProps) => {
 
     user.authenticateUser(authDetails, {
       onSuccess: (result) => {
-        console.log('onSuccess login');
         onLogIn();
       },
       onFailure: (err) => {
@@ -48,10 +48,13 @@ const LogIn: React.FC<LogInProps> = ({ onLogIn, showAlert }: LogInProps) => {
 
   return (
     <div className='signup-container'>
+      <h2>Welcome to the FlexiTool</h2>
       <div className="form-container">
-        <h3>Already have an account?</h3>
+        <h4>Already have an account?</h4>
         <form onSubmit={onSubmit}>
+          <label htmlFor="email" className="label-bold">Email</label>
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
+          <label htmlFor="password" className="label-bold">Password</label>
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
           <button type="submit">Log In</button>
         </form>
