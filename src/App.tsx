@@ -82,6 +82,7 @@ function App() {
   }, []);
 
   const handleSignUp = () => {
+    console.log('App.handleSignUp: ', signedUp);
     setSignedUp(true);
   };
 
@@ -90,6 +91,7 @@ function App() {
   };
 
   const handleLogOut = () => {
+    console.log('App.handleLogOut: ', loggedOut);
     setLoggedOut(true);
     setLoggedIn(false);
   };
