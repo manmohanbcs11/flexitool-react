@@ -1,4 +1,4 @@
-import { CognitoUserPool } from 'amazon-cognito-identity-js';
+import { CognitoUserAttribute, CognitoUserPool } from 'amazon-cognito-identity-js';
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './css/SignUp.css';
@@ -24,7 +24,8 @@ export default function SignUp(props: SignUpProps) {
       ClientId: COGNITO_CLIENT_ID
     });
 
-    cognitoPool.signUp(email, password, [], [], (err, data) => {
+    const attribute = new CognitoUserAttribute({ Name: 'name', Value: name });
+    cognitoPool.signUp(email, password, [attribute], [], (err, data) => {
       if (err) {
         console.error(err);
         props.showAlert('danger', err.message);
