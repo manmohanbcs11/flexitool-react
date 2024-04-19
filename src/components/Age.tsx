@@ -11,6 +11,7 @@ export default function Age(props: AgeProps) {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [age, setAge] = useState('');
+  const [isSectionOpen, setIsSectionOpen] = useState(false); // State variable to control section visibility
 
   const calculateAge = () => {
     if (!startDate || !endDate) {
@@ -32,6 +33,9 @@ export default function Age(props: AgeProps) {
     const days = ageInMilliseconds.getDate();
 
     setAge(`${years} years, ${months} months, ${days} days`);
+    
+    // Toggle section visibility
+    setIsSectionOpen(!isSectionOpen);
   }
 
   const currentStyle = new GetDynamicStyle(props.mode);
@@ -50,7 +54,11 @@ export default function Age(props: AgeProps) {
         <input type="date" id="end" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="age-input" />
       </div>
       <button onClick={calculateAge} className="age-button">Calculate Age</button>
-      {age !== '' && <strong className="age-result"><br/>Age: {age}</strong>}
+      {age !== '' && (
+        <div className={`age-result ${isSectionOpen ? 'open' : ''}`}>
+          <strong className="age-result-text">Age: {age}</strong>
+        </div>
+      )}
     </div>
   );
 }
