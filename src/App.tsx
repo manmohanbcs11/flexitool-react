@@ -10,7 +10,7 @@ import TextForm from './components/TextForm';
 import DiffChecker from './components/DiffChecker';
 
 function App() {
-  const [mode, setMode] = useState('white');
+  const [mode] = useState('white');
   const [alert, setAlert] = useState({ type: '', message: '' });
 
   const showAlert = (type: string, message: string) => {
