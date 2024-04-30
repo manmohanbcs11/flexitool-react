@@ -1,4 +1,4 @@
-import './css/Age.css'
+import './css/Custom.css'
 import { useState } from 'react';
 import { GetDynamicStyle } from '../controller/getDynamicStyle';
 

@@ -22,22 +22,22 @@ export function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid justify-content-center">
-        <NavLink className={`nav-link ${homeClassName}`} style={{ color: homeTextColor, border: '1px solid grey', backgroundColor: '#094a8d', borderRadius: '20px', padding: '7px 15px' }} to="/">
+        <NavLink className={`nav-link ${homeClassName}`} style={{ color: homeTextColor, border: '1px solid grey', backgroundColor: '#094a8d', borderRadius: '20px', margin: '7px', padding: '7px 15px' }} to="/">
           <FontAwesomeIcon icon={faHome} /> Home
         </NavLink>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <NavLink className={`nav-link ${location.pathname === '/text' ? 'active' : ''}`} style={{ border: '1px solid grey', backgroundColor: '#094a8d', borderRadius: '20px', padding: '7px 15px' }} to="/text">Text Utility</NavLink>
+              <NavLink className={`nav-link ${location.pathname === '/text' ? 'active' : ''}`} style={{ border: '1px solid grey', backgroundColor: '#094a8d', borderRadius: '20px', margin: '7px', padding: '7px 15px' }} to="/text">Text Utility</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className={`nav-link ${location.pathname === '/age' ? 'active' : ''}`} style={{ border: '1px solid grey', backgroundColor: '#094a8d', borderRadius: '20px', padding: '7px 15px' }} to="/age">Age Utility</NavLink>
+              <NavLink className={`nav-link ${location.pathname === '/age' ? 'active' : ''}`} style={{ border: '1px solid grey', backgroundColor: '#094a8d', borderRadius: '20px', margin: '7px', padding: '7px 15px' }} to="/age">Age Utility</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className={`nav-link ${location.pathname === '/diffcheck' ? 'active' : ''}`} style={{ border: '1px solid grey', backgroundColor: '#094a8d', borderRadius: '20px', padding: '7px 15px' }} to="/diffcheck">Diff Checker</NavLink>
+              <NavLink className={`nav-link ${location.pathname === '/diffcheck' ? 'active' : ''}`} style={{ border: '1px solid grey', backgroundColor: '#094a8d', borderRadius: '20px', margin: '7px', padding: '7px 15px' }} to="/diffcheck">Diff Checker</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className={`nav-link ${location.pathname === '/about' ? 'active' : ''}`} style={{ border: '1px solid grey', backgroundColor: '#094a8d', borderRadius: '20px', padding: '7px 15px' }} to="/about">About Us</NavLink>
+              <NavLink className={`nav-link ${location.pathname === '/about' ? 'active' : ''}`} style={{ border: '1px solid grey', backgroundColor: '#094a8d', borderRadius: '20px', margin: '7px', padding: '7px 15px' }} to="/about">About</NavLink>
             </li>
           </ul>
         </div>
